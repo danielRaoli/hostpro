@@ -11,7 +11,12 @@ import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 
 const PricingTabs = () => {
-  const plans = {
+  type Period = "monthly" | "annual";
+
+  const plans: Record<
+    Period,
+    { name: string; price: string; features: string[] }[]
+  > = {
     monthly: [
       {
         name: "Básico",
@@ -74,7 +79,7 @@ const PricingTabs = () => {
             <TabsTrigger value="annual">Anual</TabsTrigger>
           </TabsList>
 
-          {["monthly", "annual"].map((period) => (
+          {(["monthly", "annual"] as Period[]).map((period) => (
             <TabsContent key={period} value={period}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {plans[period].map((plan) => (
